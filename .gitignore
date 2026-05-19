@@ -1,0 +1,39 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+final_project_venv/
+tf-env/
+.venv/
+venv/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Large datasets and generated tensors
+data/*
+!data/README.md
+
+# Training outputs, checkpoints, plots, and metrics
+outputs/
+
+# Notebook execution artifacts
+notebooks/.ipynb_checkpoints/
+
+# Model/data blobs wherever they appear
+*.pt
+*.pth
+*.ckpt
+*.hdf5
+*.h5
+*.parquet
+*.npy
+*.npz

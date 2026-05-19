@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=61", "setuptools_scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polymathic-aion"
+dynamic = ["version"]
+description = "AstronomIcal Omnimodal Network - Polymathic's Large Omnimodal Model for Astronomy"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Polymathic AI", email = "info@polymathic-ai.org"},
+]
+maintainers = [
+    {name = "Polymathic AI", email = "info@polymathic-ai.org"},
+]
+keywords = [
+    "astronomy",
+    "astrophysics",
+    "machine learning",
+    "transformer",
+    "multimodal",
+    "deep learning",
+    "scientific computing",
+    "AI",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "einops>=0.7.0",
+    "huggingface_hub>=0.24.7",
+    "jaxtyping>=0.2.28",
+    "numpy",
+    "scipy",
+    "tokenizers>=0.15.2",
+]
+
+[project.urls]
+Homepage = "https://polymathic-ai.org/"
+Documentation = "https://polymathic-ai.github.io/AION/"
+Repository = "https://github.com/PolymathicAI/AION"
+"Bug Tracker" = "https://github.com/PolymathicAI/AION/issues"
+"Discussion" = "https://github.com/PolymathicAI/AION/discussions"
+"Hugging Face" = "https://huggingface.co/polymathic-ai/aion-base"
+
+[project.optional-dependencies]
+torch = [
+    "torch>=2.4.0",
+    "huggingface_hub[torch]>=0.24.7",
+]
+dev = [
+    "pre-commit",
+    "pytest",
+    "ruff",
+]
+docs = [
+    "furo",
+    "myst-parser>=1.0",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "sphinxcontrib-mermaid",
+    "sphinx>=7.2",
+]
+
+[tool.ruff.lint]
+# Ignore space in shape notation for jaxtyping
+# See https://docs.kidger.site/jaxtyping/faq/#flake8-or-ruff-are-throwing-an-error
+ignore = ["F722"]
+
+[tool.setuptools.packages.find]
+include = ["aion*"]
+# Only include the 'aion' package and its subpackages
+
+[tool.setuptools_scm]
+# This section configures setuptools_scm
+# It will use git tags to determine version numbers
+# If no tags exist, it will use 0.1.dev0+g<commit_hash>
+fallback_version = "0.1.dev0"
