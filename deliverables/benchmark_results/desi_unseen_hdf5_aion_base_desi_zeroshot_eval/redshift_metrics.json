@@ -1,0 +1,16 @@
+{
+  "mae": 0.5414296855848196,
+  "rmse": 0.7792461498434334,
+  "bias": -0.5413095204538892,
+  "n": 13202,
+  "source_summary": {
+    "count": 13202,
+    "length_min": 7781,
+    "length_max": 7781,
+    "length_mean": 7781.0,
+    "z_min": -0.0023749598767608404,
+    "z_max": 5.207049369812012,
+    "z_mean": 0.5413095355033875
+  },
+  "note": "AION-base zero-shot tok_z prediction from tok_spectrum_desi; no redshift-head fine-tuning."
+}

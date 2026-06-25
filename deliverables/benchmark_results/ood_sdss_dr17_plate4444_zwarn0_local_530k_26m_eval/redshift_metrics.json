@@ -1,0 +1,32 @@
+{
+  "mae": 0.19446673298619954,
+  "rmse": 0.32333877744377343,
+  "bias": -0.0440539155908747,
+  "reconstruction": {
+    "masked_flux_mae": 0.4080428698243807,
+    "masked_flux_rmse": 0.5619052571898168,
+    "masked_fraction": 0.1501049880175692
+  },
+  "reconstruction_raw": {
+    "flux_mae": 0.3191192803856727,
+    "flux_rmse": 0.44357870825706236
+  },
+  "n_ood": 816,
+  "normalization": "per-wavelength standardization computed on OOD flux only",
+  "source_summary": {
+    "count": 816,
+    "source": "SDSS DR17 speclite plate 4444 MJD 55538",
+    "reference_bundle": "data\\processed\\_smoke_mmu_desi_hf_256.pt",
+    "length": 7781,
+    "z_min": 3.439268994043232e-06,
+    "z_max": 4.448549747467041,
+    "z_mean": 0.5260302424430847,
+    "classes": [
+      "GALAXY",
+      "QSO\u0000\u0000\u0000",
+      "STAR\u0000\u0000"
+    ],
+    "zwarning_nonzero": 0,
+    "filtered": "ZWARNING == 0"
+  }
+}

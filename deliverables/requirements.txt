@@ -1,0 +1,9 @@
+numpy
+torch
+matplotlib
+scikit-learn
+tqdm
+pyarrow
+h5py
+safetensors
+huggingface_hub

@@ -33,8 +33,72 @@ deliverables/
 Install dependencies:
 
 ```powershell
-.\final_project_venv\Scripts\python.exe -m pip install -r deliverables\requirements.txt
+cd deliverables
+python -m pip install -r requirements.txt
+python scripts\check_environment.py
 ```
+
+Example evaluation command from inside the submitted `deliverables/` folder:
+
+```powershell
+python scripts\evaluate_redshift_ood_bundle.py `
+  --input <processed_benchmark_bundle.pt> `
+  --model trained_models\local_530k_26m_redshift_token_best_model.pt `
+  --output-dir <evaluation_output_dir> `
+  --d-model 512 `
+  --num-layers 8 `
+  --nhead 8 `
+  --patch-size 61 `
+  --batch-size 64 `
+  --mask-prob 0.15
+```
+
+## Making Predictions With the Submitted Models
+
+Use `scripts/evaluate_redshift_ood_bundle.py` to run either submitted model on a processed spectra bundle. The input bundle should contain a `batch` dictionary with normalized or raw `flux` and redshift labels `z`, following the same format produced by the processing scripts in `scripts/`.
+
+Local 530k/26M model:
+
+```powershell
+cd deliverables
+
+python scripts\evaluate_redshift_ood_bundle.py `
+  --input <processed_spectra_bundle.pt> `
+  --model trained_models\local_530k_26m_redshift_token_best_model.pt `
+  --output-dir <prediction_output_dir> `
+  --d-model 512 `
+  --num-layers 8 `
+  --nhead 8 `
+  --patch-size 61 `
+  --batch-size 64 `
+  --mask-prob 0.15
+```
+
+A100 141k/87M model:
+
+```powershell
+cd deliverables
+
+python scripts\evaluate_redshift_ood_bundle.py `
+  --input <processed_spectra_bundle.pt> `
+  --model trained_models\a100_141k_87m_redshift_token_best_model.pt `
+  --output-dir <prediction_output_dir> `
+  --d-model 768 `
+  --num-layers 12 `
+  --nhead 12 `
+  --patch-size 61 `
+  --batch-size 32 `
+  --mask-prob 0.15
+```
+
+Each run writes:
+
+- `redshift_predictions.json`: actual redshifts, predicted redshifts, and metrics
+- `redshift_metrics.json`: MAE, RMSE, bias, and reconstruction metrics
+- `redshift_pred_vs_actual.png`: prediction scatter plot
+- `spectrum_reconstruction.png`: example masked-spectrum reconstruction
+
+The model returns two tensors internally: reconstructed flux values for the spectrum and one scalar encoded redshift prediction per spectrum.
 
 ## Goal
 
@@ -59,6 +123,8 @@ I did not use a separate learned tokenizer like AION. I designed the model to fe
 
 - masked flux values through a reconstruction head
 - redshift through a jointly trained MLP head
+
+The processed spectra used by the submitted checkpoints have length `7781`. With `patch_size=61`, the model pads each spectrum to `7808` values internally, giving 128 spectral patch tokens plus one learned redshift query token.
 
 Implementation files:
 
@@ -118,6 +184,7 @@ training spectra: 530,071
 train/val/test: 318,042 / 79,511 / 132,518
 initial training: 100k DESI, 150 epochs
 fine-tune: initialized from the 100k best model, then continued on 530k
+input length: 7781
 d_model: 512
 layers: 8
 heads: 8
@@ -143,6 +210,7 @@ The 530k fine-tune used `lr=5e-5` instead of `1e-4` because it was adapting an a
 file: trained_models/a100_141k_87m_redshift_token_best_model.pt
 training spectra: 141,799
 train/val/test: 85,079 / 21,270 / 35,450
+input length: 7781
 d_model: 768
 layers: 12
 heads: 12
@@ -168,7 +236,7 @@ edr_sv3/*.parquet
 Download:
 
 ```powershell
-cd C:\Users\Colby\Desktop\final_project
+cd <project root>
 
 @'
 from huggingface_hub import snapshot_download
@@ -202,7 +270,7 @@ https://users.flatironinstitute.org/~polymathic/data/MultimodalUniverse/v1/desi/
 Download shards:
 
 ```powershell
-cd C:\Users\Colby\Desktop\final_project
+cd <project root>
 
 $base = "https://users.flatironinstitute.org/~polymathic/data/MultimodalUniverse/v1/desi/edr_sv3"
 $out = "data\raw_full"
@@ -256,7 +324,7 @@ I used a Flatiron healpix shard not included in the training shard list.
 Download:
 
 ```powershell
-cd C:\Users\Colby\Desktop\final_project
+cd <project root>
 
 $base = "https://users.flatironinstitute.org/~polymathic/data/MultimodalUniverse/v1/desi/edr_sv3"
 $out = "data\raw_unseen_desi"
@@ -299,7 +367,7 @@ final count: 816 spectra
 Download:
 
 ```powershell
-cd C:\Users\Colby\Desktop\final_project
+cd <project root>
 
 $out = "data\ood\sdss_dr17_plate4444_speclite"
 New-Item -ItemType Directory -Force $out | Out-Null
@@ -325,8 +393,8 @@ Convert to our model format:
 
 ```powershell
 .\final_project_venv\Scripts\python.exe scripts\process_sdss_speclite_ood.py `
-  --input data\ood\sdss_dr17_plate4444_speclite\*.fits `
-  --reference data\processed\_smoke_mmu_desi_hf_256.pt `
+  --input-dir data\ood\sdss_dr17_plate4444_speclite `
+  --reference-bundle data\processed\_smoke_mmu_desi_hf_256.pt `
   --output data\processed\ood_sdss_dr17_plate4444_speclite.pt `
   --summary outputs\tables\ood_sdss_dr17_plate4444_speclite_summary.json
 ```
@@ -536,7 +604,6 @@ This README includes the main items I wanted in the final submission:
 - results and interpretation: included under `Results` and `Takeaways`
 - AION comparison: included under `Evaluation Design`, including the missing downstream-head issue
 - future work: included below
-- supporting context: `docs/chat_history.md` and `docs/chat_history_raw.md` are referenced
 
 The main difference from my original plan is that the late note is shorter. I kept it brief because the storage problem mattered for timing, but the model design and results should be the focus.
 
@@ -576,8 +643,6 @@ Project context:
 
 ```text
 PHYS303_Final-Project_2026.pdf
-docs/chat_history_raw.md
-docs/chat_history.md
 deliverables/benchmark_results/final_eval_summary.json
 ```
 

@@ -1,0 +1,23 @@
+{
+  "mae": 0.01685632453527505,
+  "rmse": 0.15588782992635386,
+  "bias": -0.0018151706420005823,
+  "n": 816,
+  "source_summary": {
+    "count": 816,
+    "source": "SDSS DR17 speclite plate 4444 MJD 55538",
+    "reference_bundle": "data\\processed\\_smoke_mmu_desi_hf_256.pt",
+    "length": 7781,
+    "z_min": 3.439268994043232e-06,
+    "z_max": 4.448549747467041,
+    "z_mean": 0.5260302424430847,
+    "classes": [
+      "GALAXY",
+      "QSO\u0000\u0000\u0000",
+      "STAR\u0000\u0000"
+    ],
+    "zwarning_nonzero": 0,
+    "filtered": "ZWARNING == 0"
+  },
+  "note": "AION-base zero-shot tok_z prediction from tok_spectrum_sdss; no redshift-head fine-tuning."
+}

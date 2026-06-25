@@ -1,0 +1,25 @@
+{
+  "mae": 0.05956997985635136,
+  "rmse": 0.168003945210104,
+  "bias": 0.002907044330879149,
+  "reconstruction": {
+    "masked_flux_mae": 0.5466029861558145,
+    "masked_flux_rmse": 0.769987361753373,
+    "masked_fraction": 0.1499916349282951
+  },
+  "reconstruction_raw": {
+    "flux_mae": 0.4879065133867716,
+    "flux_rmse": 0.6713752766054392
+  },
+  "n_ood": 13202,
+  "normalization": "per-wavelength standardization computed on OOD flux only",
+  "source_summary": {
+    "count": 13202,
+    "length_min": 7781,
+    "length_max": 7781,
+    "length_mean": 7781.0,
+    "z_min": -0.0023749598767608404,
+    "z_max": 5.207049369812012,
+    "z_mean": 0.5413095355033875
+  }
+}

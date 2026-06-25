@@ -1,0 +1,74 @@
+[
+  {
+    "dataset": "Unseen DESI",
+    "model": "Local 530k/26M",
+    "folder": "desi_unseen_hdf5_local_530k_26m_eval",
+    "mae": 0.05956997985635136,
+    "rmse": 0.168003945210104,
+    "bias": 0.002907044330879149,
+    "n": 13202,
+    "masked_flux_mae": 0.5466029861558145,
+    "masked_flux_rmse": 0.769987361753373,
+    "note": null
+  },
+  {
+    "dataset": "Unseen DESI",
+    "model": "A100 141k/87M",
+    "folder": "desi_unseen_hdf5_a100_141k_87m_eval",
+    "mae": 0.06948495402365314,
+    "rmse": 0.18458822668317595,
+    "bias": -0.00711825293430743,
+    "n": 13202,
+    "masked_flux_mae": 0.5504549596511293,
+    "masked_flux_rmse": 0.7742629110488888,
+    "note": null
+  },
+  {
+    "dataset": "Unseen DESI",
+    "model": "AION-base DESI codec",
+    "folder": "desi_unseen_hdf5_aion_base_desi_zeroshot_eval",
+    "mae": 0.5414296855848196,
+    "rmse": 0.7792461498434334,
+    "bias": -0.5413095204538892,
+    "n": 13202,
+    "masked_flux_mae": null,
+    "masked_flux_rmse": null,
+    "note": "AION-base zero-shot tok_z prediction from tok_spectrum_desi; no redshift-head fine-tuning."
+  },
+  {
+    "dataset": "SDSS OOD",
+    "model": "Local 530k/26M",
+    "folder": "ood_sdss_dr17_plate4444_zwarn0_local_530k_26m_eval",
+    "mae": 0.19446673298619954,
+    "rmse": 0.32333877744377343,
+    "bias": -0.0440539155908747,
+    "n": 816,
+    "masked_flux_mae": 0.4080428698243807,
+    "masked_flux_rmse": 0.5619052571898168,
+    "note": null
+  },
+  {
+    "dataset": "SDSS OOD",
+    "model": "A100 141k/87M",
+    "folder": "ood_sdss_dr17_plate4444_zwarn0_a100_141k_87m_eval",
+    "mae": 0.16828928909599875,
+    "rmse": 0.36339555184196976,
+    "bias": -0.0263906364314858,
+    "n": 816,
+    "masked_flux_mae": 0.40925562526693776,
+    "masked_flux_rmse": 0.5610203279668042,
+    "note": null
+  },
+  {
+    "dataset": "SDSS OOD",
+    "model": "AION-base SDSS codec",
+    "folder": "ood_sdss_dr17_plate4444_zwarn0_aion_base_sdss_rerun_eval",
+    "mae": 0.01685632453527505,
+    "rmse": 0.15588782992635386,
+    "bias": -0.0018151706420005823,
+    "n": 816,
+    "masked_flux_mae": null,
+    "masked_flux_rmse": null,
+    "note": "AION-base zero-shot tok_z prediction from tok_spectrum_sdss; no redshift-head fine-tuning."
+  }
+]
