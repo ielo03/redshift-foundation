@@ -29,11 +29,13 @@ Thumbs.db
 .vscode/
 
 # Large datasets and generated tensors
-data/*
-!data/README.md
+data
+data/
 
 # Training outputs, checkpoints, plots, and metrics
 outputs/
+models/
+logs/
 
 # Model/data blobs wherever they appear
 *.pt

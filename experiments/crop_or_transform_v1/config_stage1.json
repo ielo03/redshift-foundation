@@ -1,0 +1,14 @@
+{
+  "experiment_id": "crop_or_transform_v1",
+  "arm": "stage1_epoch64",
+  "trainer": "scripts/train_materialized_streaming.py",
+  "data": {"input": "data/materialized_training_v1_1m", "max_train_spectra_per_epoch": 200000, "max_val_spectra": 20000},
+  "model": {"architecture": "DynamicSpectraTransformerWithRedshiftToken", "d_model": 256, "num_layers": 4, "nhead": 8, "patch_size": 61},
+  "optimization": {"epochs": 64, "batch_size": 3072, "lr": 0.0003, "alpha": 1.25, "reconstruction_weight": 1.0, "seed": 42},
+  "reconstruction": {"mask_prob": 0.15, "mask_mode": "contiguous"},
+  "classification": {"classes": ["GALAXY", "QSO"], "weight": 0.25},
+  "target_selection": {"classes": ["BGS", "LRG", "ELG", "QSO"], "weight": 0.25},
+  "runtime": {"prefetch_batches": 4},
+  "augmentation": {"policy": "exclusive", "clean_probability": 0.25, "crop_probability": 0.375, "transform_probability": 0.375, "variable_min_fraction": 0.65, "random_transforms": true, "transform_gain": 0.1, "transform_tilt": 0.1, "transform_offset": 0.05, "transform_noise": 0.02},
+  "early_stopping": {"patience": 500, "min_delta": 0.0001, "selection_metric": "z_sigma_nmad"}
+}
